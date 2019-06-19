@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import TranslateForm from './container/TranslateForm'
-import Sidebar from './component/Sidebar'
-// import 'semantic-ui-css/semantic.min.css'
-// import './App.css';
+import Sidebar from './component/Sidebar/Sidebar'
+import Register from './container/Register/Register'
+import Login from './container/Login/Login'
 
 export default class App extends Component {
   
@@ -11,11 +10,11 @@ export default class App extends Component {
     return (
       <Router>
         <div className="App">
-          {/* <div className="container-fluid" style={{paddingLeft: 0, paddingRight: 0, marginRight: 0, marginLeft: 0}}> */}
           <div className="container-fluid">
             <Switch>
-              <Route exact path='/translateForm' component={TranslateForm} />
               <Route exact path='/' component={Sidebar}/>
+              <Route exact path='/register' component={Register}/>
+              <Route exact path='/login' component={Login}/>
             </Switch>
           </div>
         </div>

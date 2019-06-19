@@ -1,6 +1,13 @@
 {
   "translations" : {
-    "title": "សូមស្វាគមន័",
-    "description": "សួស្តី,សោភ័ណ្ឌ"
+    "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+    "calendar" : "កាលវិភាគ",
+    "chart": "តារាង",
+    "notebook": "សៀវភៅកត់ត្រា",
+    "saving": "សន្សំ",
+    "investment": "ការវិនិយោគ",
+    "expense": "ចំណាយ",
+    "username": "សូ សោភ័ណ្ឌ",
+    "onlineDiary": "កំណត់ហេតុប្រចាំថ្ងៃ"
   }
 }

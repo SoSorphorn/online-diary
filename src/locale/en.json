@@ -1,6 +1,13 @@
 {
   "translations" : {
-    "title": "Welcome to React Translation.",
-    "description": "Hey, Sorphorn"
+    "dashboard": "Dashboard",
+    "calendar" : "Calendar",
+    "chart": "Chart",
+    "notebook": "NoteBooks",
+    "saving": "Saving",
+    "investment": "Investment",
+    "expense": "Expense",
+    "username": "So Sorphorn",
+    "onlineDiary" : "Online Diary"
   }
 }
