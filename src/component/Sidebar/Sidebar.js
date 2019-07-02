@@ -1,25 +1,31 @@
 import React,{Component} from 'react'
-import Navbar from '../Navbar/Navbar'
 import CustomSidbarColor from '../FixedPlugin/CustomSidbarColor'
 import profile from '../../asset/img/sosorphorn.jpg'
 import noted from '../../asset/img/noted.jpg'
-import Footer from '../Footer/Footer'
-import Dashboard from '../../container/Dashboard/Dashboard'
-import { withNamespaces } from 'react-i18next';
+import {translate} from 'react-i18next'
+import classnames from 'classnames'
 
 class Sidebar extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      activeItem: 'dashboard'
+    }
+  }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   render(){
     const {t} = this.props
+    const {activeItem} = this.state
     return(
       <>
-        <div className="wrapper ">
-          <div className="sidebar" data-color="rose" data-background-color="black" data-image="https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-1.jpg">
+        <div className="sidebar" data-color="rose" data-background-color="black" data-image="https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-1.jpg">
             <div className="logo">
               <a href="" className="simple-text logo-mini">
                 <img src={noted} style={{width: "100%"}}/>
               </a>
               <a href="" className="simple-text logo-normal">
-               {t('onlineDiary')}
+                {t('onlineDiary')}
               </a>
             </div>
             <div className="sidebar-wrapper">
@@ -30,7 +36,7 @@ class Sidebar extends Component{
                 <div className="user-info">
                   <a data-toggle="collapse" href="#username" className="username">
                     <span>
-                       {t('username')}
+                        {t('username')}
                       <b className="caret" />
                     </span>
                   </a>
@@ -59,8 +65,8 @@ class Sidebar extends Component{
                 </div>
               </div>
               <ul className="nav">
-                <li className="nav-item active ">
-                  <a className="nav-link" href="dashboard.html">
+                <li name='dashboard' className={classnames('nav-item', {'active':  activeItem == "dashboard"})} onClick={this.handleItemClick} >
+                  <a className="nav-link" href="/">
                     <i className="material-icons">dashboard</i>
                     <p> {t('dashboard')}</p>
                   </a>
@@ -219,8 +225,8 @@ class Sidebar extends Component{
                     <p>{t('chart')}</p>
                   </a>
                 </li>
-                <li className="nav-item ">
-                  <a className="nav-link" href="calendar.html">
+                <li name='calendar' className={classnames('nav-item', {'active':  activeItem == "calendar"})} onClick={this.handleItemClick}>
+                  <a className="nav-link" href="/calendar">
                     <i className="material-icons">date_range</i>
                     <p>{t('calendar')}</p>
                   </a>
@@ -228,20 +234,10 @@ class Sidebar extends Component{
               </ul>
             </div>
           </div>
-          <div className="main-panel">
-            {/* Navbar */}
-            <Navbar/>
-            {/* End Navbar */}
-            <Dashboard/>
-            <Footer/>
-          </div>
-        </div>
-        {/* Fixed Plugin Change Sidebar Color */}
         <CustomSidbarColor/>
-        {/* End fixed Plugin Change Sidebar Color */}
       </>
     ) 
   }
 }
 
-export default withNamespaces('translations')(Sidebar)
+export default translate('translations')(Sidebar)

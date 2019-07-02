@@ -1,26 +1,32 @@
 import i18n from 'i18next';
-import { reactI18nextModule } from 'react-i18next';
-import en from '../locale/en';
-import kh from '../locale/kh';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import XHR from 'i18next-xhr-backend';
 
-i18n
-  .use(reactI18nextModule)
-  .init({
-    resources: {
-      en,
-      kh,
-    },
+const config = {
     fallbackLng: 'en',
+    ns: [ 'translation-namespace' ],
+    defaultNS: 'translation-namespace',
     debug: true,
-    ns: ['translations'],
-    defaultNS: 'translations',
-    keySeparator: false,
     interpolation: {
-      escapeValue: false,
-      formatSeparator: ',',
+        escapeValue: false, // not needed for react!!
     },
+    backend: {
+        // for all available options read the backend's repository readme file
+        loadPath: '/locales/{{lng}}.json'
+    },
+    keySeparator: false, // we use content as keys
     react: {
-      wait: true,
-    },
-  });
-export default i18n;
+        wait: true
+    }
+};
+
+const init = () => {
+    i18n
+    .use( XHR )
+    .use( LanguageDetector )
+    .init( config );
+
+    return i18n;
+};
+
+export default init;
