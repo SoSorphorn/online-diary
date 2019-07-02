@@ -1,34 +1,35 @@
 import React,{Component} from 'react'
-import {options} from '../../config/options'
-import Select from 'react-select';
-import { withNamespaces } from 'react-i18next'
+import {translate} from 'react-i18next'
+import classnames from 'classnames'
 
 class Navbar extends Component{
   constructor(props){
     super(props)
-
     this.state = {
-      lang: options[0],
-      value: ''
+      value: '',
+      language: 'en'
     }
   }
-  handleChangeLang = (lang) => {
-    const { i18n } = this.props;
-    const { value } = lang;
-    this.setState({lang})
-    i18n.changeLanguage(value)
-  }
-
   handleChange = (event) => {
     this.setState({value: event.target.value});
   }
+  
   handleSubmit = (event) => {
     alert('Search Successfully')
     event.preventDefault()
   }
+
+  handleChangeLanguage = (lng) => {
+    const {i18n} = this.props
+    i18n.changeLanguage(lng)
+    this.setState({
+      language: lng
+    })
+  }
+
   render(){
-    const {lang} = this.state
     const {t} = this.props
+    const {language} = this.state
     return(
       <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div className="container-fluid">
@@ -57,13 +58,6 @@ class Navbar extends Component{
                 </button>
               </div>
             </form>
-            <div style={{width: 200}}>
-              <Select 
-                options={options}
-                onChange={this.handleChangeLang}
-                value={lang}
-              />
-            </div>
             <ul className="navbar-nav">
               <li className="nav-item dropdown">
                 <a className="nav-link" href="#pablo" id="navbarDropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -73,13 +67,14 @@ class Navbar extends Component{
                   </p>
                 </a>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownLanguage">
-                  {options.map((option) => {
-                     return (<><option value={lang} onClick={this.handleChangeLang} className="dropdown-item">{option.label}</option></>)
-                    })
-                  }
+                  <option value="kh" className={classnames('dropdown-item', {'active':  language == "kh"})}  onClick={() => this.handleChangeLanguage('kh')}>
+                      kh
+                  </option>
+                  <option value="en" className={classnames('dropdown-item', {'active':  language == "en"})} onClick={() => this.handleChangeLanguage('en')}>
+                      en
+                  </option>
                 </div>
               </li>
-
                         
               <li className="nav-item dropdown">
                 <a className="nav-link" href="http://example.com/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -119,4 +114,4 @@ class Navbar extends Component{
   }  
 }
 
-export default withNamespaces('translations')(Navbar)
+export default  translate('translations')(Navbar)
